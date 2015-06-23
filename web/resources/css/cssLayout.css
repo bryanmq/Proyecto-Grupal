@@ -30,8 +30,10 @@
 
 .center_content {
     position: relative;
-    background-color: #dddddd;
+    background-color: #FF562E;
     padding: 5px;
+    text-align: center;
+    font-size: 15px;
 }
 
 .left_content {
