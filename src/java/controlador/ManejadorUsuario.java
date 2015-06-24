@@ -6,7 +6,9 @@
 package controlador;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import modelo.Usuario;
 
 /**
  *
@@ -16,9 +18,8 @@ import javax.faces.bean.RequestScoped;
 @RequestScoped
 public class ManejadorUsuario {
 
-    /**
-     * Creates a new instance of ManejadorUsuario
-     */
+    @ManagedProperty(value = "#{usuario}")
+    private Usuario usuario;
     public ManejadorUsuario() {
     }
     

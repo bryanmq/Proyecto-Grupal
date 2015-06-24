@@ -1,0 +1,89 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <h:outputStylesheet name="./css/default.css"/>
+        <h:outputStylesheet name="./css/cssLayout.css"/>
+        <h:outputStylesheet name="./css/styles.css"/>
+        <title>Registro Usuario</title>
+    </h:head>
+
+    <h:body>
+        <div id="top" class="top">
+            <ui:insert name="top">"Registro de Usuarios"</ui:insert>
+        </div>
+        
+        <div>
+            <div id="left">
+                <ui:insert name="left">
+                    <img src="resources/images/users.jpg" id="imageUser"/>
+                </ui:insert>
+            </div>
+            <div id="content" class="left_content">
+                <ui:insert name="content">
+                    <h:form>
+                        <h:panelGrid columns="3" class="panel_central">
+
+                            <p:outputLabel for="nombre" value="Nombre:"/>
+                            <p:inputText id="nombre" value="#{manejadorUsuario.usuario.nombre}" required="true" requiredMessage="Escriba el nombre"/>
+                            <p:message for="nombre"/>
+
+                            <p:outputLabel for="cedula" value="Cédula:"/>
+                            <p:inputMask id="cedula" value="#{manejadorUsuario.usuario.cedula}" mask="9-9999-9999" required="true" requiredMessage="Escriba la cédula"/>
+                            <p:message for="cedula"/>
+
+                            <p:outputLabel for="telefono" value="Teléfono:"/>
+                            <p:inputMask id="telefono" value="#{manejadorUsuario.usuario.telefono}" mask="9999-9999" required="true" requiredMessage="Escriba el teléfono"/>
+                            <p:message for="telefono"/>
+
+                            <p:outputLabel for="fecha" value="Fecha de Nacimiento"/>
+                            <p:calendar id="fecha" value="#{manejadorUsuario.usuario.fechaNacimiento}" effect="fold" required="true" requiredMessage="Escriba la fecha de nacimiento"/>
+                            <p:message for="fecha"/>
+
+                            <p:outputLabel for="sexo" value="Sexo:"/>
+                            <h:panelGrid columns="1">
+                                <p:selectOneRadio id="sexo" value="#{manejadorUsuario.usuario.sexo}" required="true" requiredMessage="Seleccione el sexo">
+                                    <f:selectItem itemValue="Femenino" itemLabel="Femenino"/>
+                                    <f:selectItem itemValue="Masculino" itemLabel="Masculino"/>
+                                </p:selectOneRadio>
+                            </h:panelGrid>
+                            <p:message for="sexo"/>
+
+                            <p:outputLabel for="direccion" value="Dirección:"/>
+                            <p:inputTextarea id="direccion" value="#{manejadorUsuario.usuario.direccion}" required="true" requiredMessage="Escriba la dirección"/>
+                            <p:message for="direccion"/>
+
+                            <p:outputLabel for="correo" value="Correo :"/>
+                            <p:inputText id="correo" value="#{manejadorUsuario.usuario.correo}" required="true" requiredMessage="Escriba el correo">
+                                <f:validator validatorId="validadorCorreo"/>
+                            </p:inputText>
+                            <p:message for="correo"/>
+                            
+                            <p:outputLabel for="usuario" value="Nombre de Usuario:"/>
+                            <p:inputText id="usuario" value="#{manejadorUsuario.usuario.nombreUsuario}" required="true" requiredMessage="Escriba el nombre de usuario"/>
+                            <p:message for="usuario"/>
+
+                            <p:outputLabel for="contraseña" value="Contraseña:"/>
+                            <p:password id="contraseña" value="#{manejadorUsuario.usuario.contraseña}" match="verificar" feedback="true" required="true" requiredMessage="Escriba la contraseña"/>             
+                            <p:message for="contraseña"/>
+
+                            <p:outputLabel for="verificar" value="Verificar contraseña:"/>
+                            <p:password id="verificar" value="#{manejadorUsuario.usuario.contraseña}" required="true" requiredMessage="Escriba la verificación"/>
+                            <p:message for="verificar"/>
+                                
+                            <p:commandButton value="Registrar" ajax="false" action="#{manejadorUsuario.agregarUsuario(e)}"/>
+                            <p:commandButton value="Regresar" ajax="false" action="paginaPrincipal" immediate="true"/>
+                            <!-- immediate=omite las validaciones -->
+                        </h:panelGrid>
+                    </h:form>
+                </ui:insert>
+            </div>
+        </div>
+    </h:body>
+</html>
