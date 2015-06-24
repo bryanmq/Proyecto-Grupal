@@ -17,7 +17,7 @@
 
         <div id="top">
             <ui:insert name="top">
-                <img src="resources/images/clinica.jpg" width="1667" height="1667" alt="clinica"/>
+                <img src="resources/images/clinica.jpg" id="main"/>
             </ui:insert>
         </div>
 
@@ -32,7 +32,7 @@
                         <p:commandButton value="Ingresar" ajax="false"/>
                         <h:panelGrid  columns="1">
                             <p:outputLabel value="¿No dispones de una cuenta?"/>
-                            <p:commandLink value="Regístrate ahora" style="font-size: 12px;" />
+                            <p:commandLink value="Regístrate ahora" style="font-size: 15px; color: #ffffff;"  />
                         </h:panelGrid>
                     </h:panelGrid>
                 </h:form>
@@ -40,7 +40,9 @@
         </div>
 
         <div id="bottom">
-            <ui:insert name="bottom">Bottom</ui:insert>
+            <ui:insert name="bottom">
+                By:Bryan, Carolina, Scarlett, Kevin
+            </ui:insert>
         </div>
 
     </h:body>
