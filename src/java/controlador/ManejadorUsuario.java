@@ -22,5 +22,15 @@ public class ManejadorUsuario {
     private Usuario usuario;
     public ManejadorUsuario() {
     }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+    
+    
     
 }

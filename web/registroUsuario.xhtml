@@ -15,17 +15,17 @@
     </h:head>
 
     <h:body>
-        <div id="top" class="top">
+        <div id="top">
             <ui:insert name="top">"Registro de Usuarios"</ui:insert>
         </div>
         
         <div>
             <div id="left">
                 <ui:insert name="left">
-                    <img src="resources/images/users.jpg" id="imageUser"/>
+                    
                 </ui:insert>
             </div>
-            <div id="content" class="left_content">
+            <div id="content">
                 <ui:insert name="content">
                     <h:form>
                         <h:panelGrid columns="3" class="panel_central">
@@ -77,7 +77,7 @@
                             <p:password id="verificar" value="#{manejadorUsuario.usuario.contraseña}" required="true" requiredMessage="Escriba la verificación"/>
                             <p:message for="verificar"/>
                                 
-                            <p:commandButton value="Registrar" ajax="false" action="#{manejadorUsuario.agregarUsuario(e)}"/>
+                            <p:commandButton value="Registrar" ajax="false" />
                             <p:commandButton value="Regresar" ajax="false" action="paginaPrincipal" immediate="true"/>
                             <!-- immediate=omite las validaciones -->
                         </h:panelGrid>
