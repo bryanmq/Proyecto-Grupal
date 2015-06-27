@@ -64,10 +64,6 @@
                                 <f:validator validatorId="validadorCorreo"/>
                             </p:inputText>
                             <p:message for="correo"/>
-                            
-                            <p:outputLabel for="usuario" value="Nombre de Usuario:"/>
-                            <p:inputText id="usuario" value="#{manejadorUsuario.usuario.nombreUsuario}" required="true" requiredMessage="Escriba el nombre de usuario"/>
-                            <p:message for="usuario"/>
 
                             <p:outputLabel for="contraseña" value="Contraseña:"/>
                             <p:password id="contraseña" value="#{manejadorUsuario.usuario.contraseña}" match="verificar" feedback="true" required="true" requiredMessage="Escriba la contraseña"/>             
@@ -77,7 +73,7 @@
                             <p:password id="verificar" value="#{manejadorUsuario.usuario.contraseña}" required="true" requiredMessage="Escriba la verificación"/>
                             <p:message for="verificar"/>
                                 
-                            <p:commandButton value="Registrar" ajax="false" />
+                            <p:commandButton value="Registrar" ajax="false" action="#{manejadorUsuario.agregarUsuario(e)}" />
                             <p:commandButton value="Regresar" ajax="false" action="paginaPrincipal" immediate="true"/>
                             <!-- immediate=omite las validaciones -->
                         </h:panelGrid>

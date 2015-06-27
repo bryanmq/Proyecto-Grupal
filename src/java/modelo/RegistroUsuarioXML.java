@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.jdom2.Attribute;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
@@ -60,6 +61,38 @@ public class RegistroUsuarioXML {
         } catch (JDOMException | IOException ex) {
             System.out.println("error");
         }
+    }
+    
+    public void addUser(Usuario user) throws IOException {
+        Element usuario = new Element("usuario");
+        Element nombre = new Element("nombre");
+        Attribute cedula = new Attribute("cedula", user.getCedula());
+        Element telefono = new Element("telefono");
+        Element fechaNacimiento = new Element("fechaNacimiento");
+        Element sexo = new Element("sexo");
+        Element direccion = new Element("direccion");
+        Element correo = new Element("correo");
+        Element password = new Element("password");
+        
+        nombre.addContent(user.getNombre());
+        telefono.addContent(user.getTelefono());
+        fechaNacimiento.addContent(user.getFechaNacimiento().toString());
+        sexo.addContent(user.getSexo());
+        direccion.addContent(user.getDireccion());
+        correo.addContent(user.getCorreo());
+        password.addContent(user.getContraseña());
+        
+        usuario.setAttribute(cedula);
+        usuario.addContent(nombre);
+        usuario.addContent(telefono);
+        usuario.addContent(fechaNacimiento);
+        usuario.addContent(sexo);
+        usuario.addContent(direccion);
+        usuario.addContent(correo);
+        usuario.addContent(password);
+        
+        raiz.addContent(usuario);
+        this.guardar();
     }
 
 }//Fin clase

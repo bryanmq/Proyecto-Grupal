@@ -17,13 +17,13 @@ import javax.faces.bean.RequestScoped;
 @RequestScoped
 public class Usuario {
 
-    private String nombre, cedula, telefono, sexo, direccion, correo, contraseña, nombreUsuario;
+    private String nombre, cedula, telefono, sexo, direccion, correo, contraseña;
     private Date fechaNacimiento;
     
     public Usuario() {
     }
 
-    public Usuario(String nombre, String cedula, String telefono, String sexo, String direccion, String correo, String contraseña, String nombreUsuario, Date fechaNacimiento) {
+    public Usuario(String nombre, String cedula, String telefono, String sexo, String direccion, String correo, String contraseña, Date fechaNacimiento) {
         this.nombre = nombre;
         this.cedula = cedula;
         this.telefono = telefono;
@@ -31,7 +31,6 @@ public class Usuario {
         this.direccion = direccion;
         this.correo = correo;
         this.contraseña = contraseña;
-        this.nombreUsuario = nombreUsuario;
         this.fechaNacimiento = fechaNacimiento;
     }
 
@@ -89,14 +88,6 @@ public class Usuario {
 
     public void setContraseña(String contraseña) {
         this.contraseña = contraseña;
-    }
-
-    public String getNombreUsuario() {
-        return nombreUsuario;
-    }
-
-    public void setNombreUsuario(String nombreUsuario) {
-        this.nombreUsuario = nombreUsuario;
     }
 
     public Date getFechaNacimiento() {

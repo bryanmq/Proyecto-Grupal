@@ -5,10 +5,15 @@
  */
 package controlador;
 
+import java.io.File;
+import java.io.IOException;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.event.ActionEvent;
+import modelo.RegistroUsuarioXML;
 import modelo.Usuario;
+import org.jdom2.JDOMException;
 
 /**
  *
@@ -29,6 +34,13 @@ public class ManejadorUsuario {
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+    }
+    
+     public String agregarUsuario(ActionEvent e) throws JDOMException, IOException {
+        File archivoXML = new File("Usuario.xml");
+        RegistroUsuarioXML registroUser = new RegistroUsuarioXML(archivoXML);
+        registroUser.addUser(this.usuario);
+        return "index";
     }
     
     
