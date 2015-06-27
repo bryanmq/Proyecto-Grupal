@@ -25,11 +25,11 @@
             <ui:insert name="content">
                 <h:form>
                     <h:panelGrid columns="2" class="panel_central">
+                        <p:outputLabel value="Correo: "/>
+                        <p:inputText value="#{usuario.correo}"/>
                         <p:outputLabel value="Contraseña: "/>
-                        <p:inputText />
-                        <p:outputLabel value="Contraseña: "/>
-                        <p:password/>
-                        <p:commandButton value="Ingresar" ajax="false"/>
+                        <p:password value="#{usuario.contraseña}"/>
+                        <p:commandButton value="Ingresar" ajax="false" action="#{manejadorUsuario.login(usuario.contraseña, usuario.correo)}"/>
                         <h:panelGrid  columns="1">
                             <p:outputLabel value="¿No dispones de una cuenta?"/>
                             <p:commandLink value="Regístrate ahora" style="font-size: 15px; color: #ffffff;" action="registroUsuario"  />

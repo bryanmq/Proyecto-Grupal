@@ -8,6 +8,8 @@ package modelo;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.jdom2.Attribute;
@@ -93,6 +95,26 @@ public class RegistroUsuarioXML {
         
         raiz.addContent(usuario);
         this.guardar();
+    }
+    
+    public Usuario verificarUsuario(String contraseña, String correo) {
+        List<Element> listaUsuarios = (List<Element>) raiz.getChildren();
+        for (Element usuario : listaUsuarios) {
+            if (usuario.getChildText("password").equals(contraseña) && usuario.getChildText("correo").equals(correo)) {
+                Date date = new Date(usuario.getChildText("fechaNacimiento"));
+                return new Usuario(
+                        usuario.getChildText("nombre"),
+                        usuario.getAttributeValue("cedula"),
+                        usuario.getChildText("telefono"),
+                        usuario.getChildText("sexo"),
+                        usuario.getChildText("direccion"),
+                        usuario.getChildText("correo"),
+                        usuario.getChildText("password"),
+                        date
+                );
+            }
+        }
+        return null;
     }
 
 }//Fin clase
