@@ -5,12 +5,56 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <head>
-        <title>TODO supply a title</title>
+        <title>¡Bienvenido a la Clínica!</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <h:outputStylesheet name="./css/default.css"/>
+        <h:outputStylesheet name="./css/cssLayout.css"/>
+        <h:outputStylesheet name="./css/styles.css"/>
     </head>
     <body>
-        <div>Bienvenido USUARIO</div>
+        <div>
+            <ui:composition template="paginaPrincipal.xhtml">
+
+                <ui:define name="top">
+                    <img src="resources/images/clinica.jpg" id="main2"/>
+                </ui:define>
+
+                <ui:define name="content">
+                    <h:form>  
+                        <p:menubar>
+                            <p:submenu label="Registro de Citas" icon="ui-icon-document">
+                                <p:menuitem value="Agregar una cita" action="#" />
+                                <p:menuitem value="Modificar una cita" url="#" />
+                            </p:submenu>
+
+                            <p:submenu label="Historial de citas">
+                                <p:menuitem value="Ver historial" url="#" icon="ui-icon-arrowreturnthick-1-w" />
+                            </p:submenu>
+
+                            <p:submenu label="Configuración Personal">
+                                <p:menuitem value="Actualizar Datos" url="#" icon="ui-icon-arrowreturnthick-1-w" />
+                            </p:submenu>
+
+                            <f:facet name="options">
+                                <p:outputLabel style="margin-right:10px" value="Bienvenido: #{usuario.correo}"/>
+                                <p:commandButton ajax="false" value="Cerrar Sesión" icon="ui-icon-extlink" action="paginaPrincipal" immediate="true" />
+                            </f:facet>
+                        </p:menubar>
+                    </h:form>
+                </ui:define>
+
+                <ui:define name="bottom">
+                    <div id="bottom2">
+                    <img src="resources/images/logo.jpg" id="main3"/></div>
+                </ui:define>
+                
+            </ui:composition>
+        </div>
     </body>
 </html>
