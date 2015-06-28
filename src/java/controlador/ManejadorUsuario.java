@@ -54,10 +54,10 @@ public class ManejadorUsuario {
         if (!"".equals(contraseña) && !"".equals(correo) && registroUsuarioXML.verificarUsuario(contraseña, correo, 1) != null) {
             if (contraseña.equals(((Usuario) registroUsuarioXML.verificarUsuario(contraseña, correo, 1)).getContraseña()) && correo.equals(((Usuario) registroUsuarioXML.verificarUsuario(contraseña, correo, 1)).getCorreo())) {
                 return "loginUser";
-            }
-        } else {
-            if (usuario.getCorreo().equals("usuario@ucr.ac.cr") && usuario.getContraseña().equals("123")) {
-                return "loginAdmin";
+            } else {
+                if (usuario.getCorreo().equals("usuario@ucr.ac.cr") && usuario.getContraseña().equals("123")) {
+                    return "loginAdmin";
+                }
             }
         }
         return "";
