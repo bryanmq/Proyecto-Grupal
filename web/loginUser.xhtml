@@ -29,7 +29,7 @@ and open the template in the editor.
                     <h:form>  
                         <p:menubar>
                             <p:submenu label="Registro de Citas" icon="ui-icon-document">
-                                <p:menuitem value="Agregar una cita" action="#" />
+                                <p:menuitem value="Agregar una cita"/>
                                 <p:menuitem value="Modificar una cita" url="#" />
                             </p:submenu>
 
@@ -38,11 +38,11 @@ and open the template in the editor.
                             </p:submenu>
 
                             <p:submenu label="Configuración Personal">
-                                <p:menuitem value="Actualizar Datos" url="#" icon="ui-icon-arrowreturnthick-1-w" />
+                                <p:menuitem value="Actualizar Datos"  action="actualizarUsuario" icon="ui-icon-arrowreturnthick-1-w" />
                             </p:submenu>
 
                             <f:facet name="options">
-                                <p:outputLabel style="margin-right:10px" value="Bienvenido: #{usuario.correo}"/>
+                                <p:outputLabel style="margin-right:10px" value="Bienvenido: #{manejadorUsuario.infoUsuario.nombre}"/>
                                 <p:commandButton ajax="false" value="Cerrar Sesión" icon="ui-icon-extlink" action="paginaPrincipal" immediate="true" />
                             </f:facet>
                         </p:menubar>

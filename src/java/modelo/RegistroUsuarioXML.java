@@ -64,7 +64,7 @@ public class RegistroUsuarioXML {
             System.out.println("error");
         }
     }
-    
+
     public void addUser(Usuario user) throws IOException {
         Element usuario = new Element("usuario");
         Element nombre = new Element("nombre");
@@ -75,7 +75,7 @@ public class RegistroUsuarioXML {
         Element direccion = new Element("direccion");
         Element correo = new Element("correo");
         Element password = new Element("password");
-        
+
         nombre.addContent(user.getNombre());
         telefono.addContent(user.getTelefono());
         fechaNacimiento.addContent(user.getFechaNacimiento().toString());
@@ -83,7 +83,7 @@ public class RegistroUsuarioXML {
         direccion.addContent(user.getDireccion());
         correo.addContent(user.getCorreo());
         password.addContent(user.getContraseña());
-        
+
         usuario.setAttribute(cedula);
         usuario.addContent(nombre);
         usuario.addContent(telefono);
@@ -92,29 +92,45 @@ public class RegistroUsuarioXML {
         usuario.addContent(direccion);
         usuario.addContent(correo);
         usuario.addContent(password);
-        
+
         raiz.addContent(usuario);
         this.guardar();
     }
-    
-    public Usuario verificarUsuario(String contraseña, String correo) {
+
+    public Object verificarUsuario(String contraseña, String correo, int index) {
         List<Element> listaUsuarios = (List<Element>) raiz.getChildren();
         for (Element usuario : listaUsuarios) {
-            if (usuario.getChildText("password").equals(contraseña) && usuario.getChildText("correo").equals(correo)) {
+            //if (usuario.getChildText("password").equals(contraseña) && usuario.getChildText("correo").equals(correo)) {
                 Date date = new Date(usuario.getChildText("fechaNacimiento"));
-                return new Usuario(
-                        usuario.getChildText("nombre"),
-                        usuario.getAttributeValue("cedula"),
-                        usuario.getChildText("telefono"),
-                        usuario.getChildText("sexo"),
-                        usuario.getChildText("direccion"),
-                        usuario.getChildText("correo"),
-                        usuario.getChildText("password"),
-                        date
-                );
-            }
+                if (index == 1) {
+                    return new Usuario(
+                            usuario.getChildText("nombre"),
+                            usuario.getAttributeValue("cedula"),
+                            usuario.getChildText("telefono"),
+                            usuario.getChildText("sexo"),
+                            usuario.getChildText("direccion"),
+                            usuario.getChildText("correo"),
+                            usuario.getChildText("password"),
+                            date);
+                } else {
+                    return usuario;
+                }
+
+            //}
         }
         return null;
+    }
+
+    public void modificarUsuario(Usuario user) {
+        Element usuarioEncontrado = (Element) this.verificarUsuario(user.getContraseña(), user.getCorreo(), 0);
+        usuarioEncontrado.getChild("nombre").setText(user.getNombre());
+        usuarioEncontrado.getChild("telefono").setText(user.getTelefono());
+        usuarioEncontrado.getChild("fechaNacimiento").setText(user.getFechaNacimiento().toString());
+        usuarioEncontrado.getChild("sexo").setText(user.getSexo());
+        usuarioEncontrado.getChild("direccion").setText(user.getDireccion());
+        usuarioEncontrado.getChild("correo").setText(user.getCorreo());
+        usuarioEncontrado.getChild("password").setText(user.getContraseña());
+        guardar();
     }
 
 }//Fin clase

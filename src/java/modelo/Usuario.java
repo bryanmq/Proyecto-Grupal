@@ -6,6 +6,7 @@
 package modelo;
 
 import java.util.Date;
+import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
@@ -14,7 +15,7 @@ import javax.faces.bean.RequestScoped;
  * @author bryanmq
  */
 @ManagedBean
-@RequestScoped
+@ApplicationScoped 
 public class Usuario {
 
     private String nombre, cedula, telefono, sexo, direccion, correo, contraseña;

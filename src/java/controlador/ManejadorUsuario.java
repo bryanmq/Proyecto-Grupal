@@ -7,6 +7,8 @@ package controlador;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -25,6 +27,7 @@ import org.jdom2.JDOMException;
 public class ManejadorUsuario {
 
     @ManagedProperty(value = "#{usuario}")
+
     private Usuario usuario;
     private File archivoXML;
     private RegistroUsuarioXML registroUsuarioXML;
@@ -48,8 +51,8 @@ public class ManejadorUsuario {
     }
 
     public String login(String contraseña, String correo) throws JDOMException, IOException {
-        if (!"".equals(contraseña) && !"".equals(correo) && registroUsuarioXML.verificarUsuario(contraseña, correo) != null) {
-            if (contraseña.equals(registroUsuarioXML.verificarUsuario(contraseña, correo).getContraseña()) && correo.equals(registroUsuarioXML.verificarUsuario(contraseña, correo).getCorreo())) {
+        if (!"".equals(contraseña) && !"".equals(correo) && registroUsuarioXML.verificarUsuario(contraseña, correo, 1) != null) {
+            if (contraseña.equals(((Usuario) registroUsuarioXML.verificarUsuario(contraseña, correo, 1)).getContraseña()) && correo.equals(((Usuario) registroUsuarioXML.verificarUsuario(contraseña, correo, 1)).getCorreo())) {
                 return "loginUser";
             }
         } else {
@@ -59,5 +62,14 @@ public class ManejadorUsuario {
         }
         return "";
     }//fin metodo
+
+    public Usuario getInfoUsuario() {
+        this.usuario = (Usuario) registroUsuarioXML.verificarUsuario(usuario.getContraseña(), usuario.getCorreo(), 1);
+        return usuario;
+    }
+
+    public void modificarUsuario() {
+        registroUsuarioXML.modificarUsuario(this.usuario);
+    }
 
 }

@@ -1,42 +1,38 @@
-<?xml version='1.0' encoding='UTF-8' ?> 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-
-    <h:head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <h:outputStylesheet name="./css/default.css"/>
-        <h:outputStylesheet name="./css/cssLayout.css"/>
-        <h:outputStylesheet name="./css/styles.css"/>
-        <title>Registro Usuario</title>
-    </h:head>
-
-    <h:body>
-        <div id="top">
-            <ui:insert name="top">"Registro de Usuarios"</ui:insert>
-        </div>
-        
+    <head>
+        <title>Welcome</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <body>
         <div>
-            <div id="left">
-                <ui:insert name="left">
-                    <img src="resources/images/card.jpg" id="main4"/>
-
-                </ui:insert>
-            </div>
-            <div id="content">
-                <ui:insert name="content">
+            <ui:composition template="registroUsuario.xhtml">
+                <ui:define name="top" id="title">
+                    "ACTUALIZAR DATOS" 
+                </ui:define>
+                
+                
+                <ui:define name="content">
                     <h:form>
+                        <p:growl id="growl" life="3000" />
                         <h:panelGrid columns="3" class="panel_central">
 
                             <p:outputLabel for="nombre" value="Nombre:"/>
-                            <p:inputText id="nombre" value="#{manejadorUsuario.usuario.nombre}" required="true" requiredMessage="Escriba el nombre"/>
+                            <p:inputText id="nombre" value="#{manejadorUsuario.infoUsuario.nombre}" required="true" requiredMessage="Escriba el nombre"/>
                             <p:message for="nombre"/>
 
                             <p:outputLabel for="cedula" value="Cédula:"/>
-                            <p:inputMask id="cedula" value="#{manejadorUsuario.usuario.cedula}" mask="9-9999-9999" required="true" requiredMessage="Escriba la cédula"/>
+                            <p:inputMask id="cedula" value="#{manejadorUsuario.usuario.cedula}" disabled="true" mask="9-9999-9999" required="true" requiredMessage="Escriba la cédula"/>
                             <p:message for="cedula"/>
 
                             <p:outputLabel for="telefono" value="Teléfono:"/>
@@ -67,20 +63,16 @@
                             <p:message for="correo"/>
 
                             <p:outputLabel for="contraseña" value="Contraseña:"/>
-                            <p:password id="contraseña" value="#{manejadorUsuario.usuario.contraseña}" match="verificar" feedback="true" required="true" requiredMessage="Escriba la contraseña"/>             
+                            <p:inputText id="contraseña" value="#{manejadorUsuario.usuario.contraseña}" required="true" requiredMessage="Escriba la contraseña"/>             
                             <p:message for="contraseña"/>
 
-                            <p:outputLabel for="verificar" value="Verificar contraseña:"/>
-                            <p:password id="verificar" value="#{manejadorUsuario.usuario.contraseña}" required="true" requiredMessage="Escriba la verificación"/>
-                            <p:message for="verificar"/>
-                                
-                            <p:commandButton value="Registrar" ajax="false" action="#{manejadorUsuario.agregarUsuario(e)}" />
-                            <p:commandButton value="Regresar" ajax="false" action="paginaPrincipal" immediate="true"/>
+                            <p:commandButton value="Modificar" update="growl" actionListener="#{buttonView.buttonAction}" action="#{manejadorUsuario.modificarUsuario()}" />
+                            <p:commandButton value="Regresar" ajax="false" action="loginUser" immediate="true"/>
                             <!-- immediate=omite las validaciones -->
                         </h:panelGrid>
                     </h:form>
-                </ui:insert>
-            </div>
+                </ui:define>
+            </ui:composition>
         </div>
-    </h:body>
+    </body>
 </html>
