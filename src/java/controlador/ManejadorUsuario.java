@@ -55,14 +55,14 @@ public class ManejadorUsuario {
 
     public String login(String contraseña, String correo) throws JDOMException, IOException {
         if (!"".equals(contraseña) && !"".equals(correo) && registroUsuarioXML.verificarUsuario(contraseña, correo) != null) {
-            if (contraseña.equals(registroUsuarioXML.verificarUsuario(contraseña, correo).getContraseña()) && correo.equals( registroUsuarioXML.verificarUsuario(contraseña, correo).getCorreo())) {
+            if (contraseña.equals(registroUsuarioXML.verificarUsuario(contraseña, correo).getContraseña()) && correo.equals(registroUsuarioXML.verificarUsuario(contraseña, correo).getCorreo())) {
                 return "loginUser";
-            } 
-        }else {
-                if (usuario.getCorreo().equals("usuario@ucr.ac.cr") && usuario.getContraseña().equals("123")) {
-                    return "loginAdmin";
-                }
             }
+        } else {
+            if (usuario.getCorreo().equals("usuario@ucr.ac.cr") && usuario.getContraseña().equals("123")) {
+                return "loginAdmin";
+            }
+        }
         return "";
     }//fin metodo
 
@@ -74,11 +74,10 @@ public class ManejadorUsuario {
     public void modificarUsuario() {
         registroUsuarioXML.modificarUsuario(this.usuario);
     }
-    
-    public ArrayList<Usuario> getListaUser() throws ParseException, JDOMException, IOException {   
-        ArrayList<Usuario> listaUser=registroUsuarioXML.getUsuario();
+
+    public ArrayList<Usuario> getListaUser() throws ParseException, JDOMException, IOException {
+        ArrayList<Usuario> listaUser = registroUsuarioXML.getUsuario();
         return listaUser;
     }
-
 
 }
