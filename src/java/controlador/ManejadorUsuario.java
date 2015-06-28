@@ -7,6 +7,9 @@ package controlador;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Array;
+import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
@@ -51,25 +54,31 @@ public class ManejadorUsuario {
     }
 
     public String login(String contraseña, String correo) throws JDOMException, IOException {
-        if (!"".equals(contraseña) && !"".equals(correo) && registroUsuarioXML.verificarUsuario(contraseña, correo, 1) != null) {
-            if (contraseña.equals(((Usuario) registroUsuarioXML.verificarUsuario(contraseña, correo, 1)).getContraseña()) && correo.equals(((Usuario) registroUsuarioXML.verificarUsuario(contraseña, correo, 1)).getCorreo())) {
+        if (!"".equals(contraseña) && !"".equals(correo) && registroUsuarioXML.verificarUsuario(contraseña, correo) != null) {
+            if (contraseña.equals(registroUsuarioXML.verificarUsuario(contraseña, correo).getContraseña()) && correo.equals( registroUsuarioXML.verificarUsuario(contraseña, correo).getCorreo())) {
                 return "loginUser";
-            } else {
+            } 
+        }else {
                 if (usuario.getCorreo().equals("usuario@ucr.ac.cr") && usuario.getContraseña().equals("123")) {
                     return "loginAdmin";
                 }
             }
-        }
         return "";
     }//fin metodo
 
     public Usuario getInfoUsuario() {
-        this.usuario = (Usuario) registroUsuarioXML.verificarUsuario(usuario.getContraseña(), usuario.getCorreo(), 1);
+        this.usuario = registroUsuarioXML.verificarUsuario(usuario.getContraseña(), usuario.getCorreo());
         return usuario;
     }
 
     public void modificarUsuario() {
         registroUsuarioXML.modificarUsuario(this.usuario);
     }
+    
+    public ArrayList<Usuario> getListaUser() throws ParseException, JDOMException, IOException {   
+        ArrayList<Usuario> listaUser=registroUsuarioXML.getUsuario();
+        return listaUser;
+    }
+
 
 }

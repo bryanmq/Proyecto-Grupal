@@ -8,6 +8,8 @@ package modelo;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -97,12 +99,31 @@ public class RegistroUsuarioXML {
         this.guardar();
     }
 
-    public Object verificarUsuario(String contraseña, String correo, int index) {
+    public Usuario verificarUsuario(String contraseña, String correo) {
         List<Element> listaUsuarios = (List<Element>) raiz.getChildren();
         for (Element usuario : listaUsuarios) {
-            //if (usuario.getChildText("password").equals(contraseña) && usuario.getChildText("correo").equals(correo)) {
+            if (usuario.getChildText("password").equals(contraseña) && usuario.getChildText("correo").equals(correo)) {
                 Date date = new Date(usuario.getChildText("fechaNacimiento"));
+                return new Usuario(
+                        usuario.getChildText("nombre"),
+                        usuario.getAttributeValue("cedula"),
+                        usuario.getChildText("telefono"),
+                        usuario.getChildText("sexo"),
+                        usuario.getChildText("direccion"),
+                        usuario.getChildText("correo"),
+                        usuario.getChildText("password"),
+                        date);
+            }
+        }
+        return null;
+    }
+
+    public Object verificarUsuarioXCedula(String cedula, int index) {
+        List<Element> listaUsuarios = (List<Element>) raiz.getChildren();
+        for (Element usuario : listaUsuarios) {
+            if (usuario.getAttributeValue("cedula").equals(cedula)) {
                 if (index == 1) {
+                    Date date = new Date(usuario.getChildText("fechaNacimiento"));
                     return new Usuario(
                             usuario.getChildText("nombre"),
                             usuario.getAttributeValue("cedula"),
@@ -115,14 +136,34 @@ public class RegistroUsuarioXML {
                 } else {
                     return usuario;
                 }
-
-            //}
+            }
         }
         return null;
     }
 
+    public ArrayList<Usuario> getUsuario() throws ParseException {
+
+        ArrayList<Usuario> listaUsuarios = new ArrayList<>();
+        Usuario usuario;
+        List<Element> listaE = (List<Element>) raiz.getChildren();
+
+        for (Element listaE1 : listaE) {
+            usuario = new Usuario();
+            Date fechaNac = new Date(listaE1.getChildText("fechaNacimiento"));
+            usuario.setNombre(listaE1.getChildText("nombre"));
+            usuario.setCedula(listaE1.getAttributeValue("cedula"));
+            usuario.setTelefono(listaE1.getChildText("telefono"));
+            usuario.setFechaNacimiento(fechaNac);
+            usuario.setSexo(listaE1.getChildText("sexo"));
+            usuario.setCorreo(listaE1.getChildText("correo"));
+            usuario.setDireccion(listaE1.getChildText("direccion"));
+            listaUsuarios.add(usuario);
+        }
+        return listaUsuarios;
+    }
+
     public void modificarUsuario(Usuario user) {
-        Element usuarioEncontrado = (Element) this.verificarUsuario(user.getContraseña(), user.getCorreo(), 0);
+        Element usuarioEncontrado = (Element) this.verificarUsuarioXCedula(user.getCedula(),0);
         usuarioEncontrado.getChild("nombre").setText(user.getNombre());
         usuarioEncontrado.getChild("telefono").setText(user.getTelefono());
         usuarioEncontrado.getChild("fechaNacimiento").setText(user.getFechaNacimiento().toString());
