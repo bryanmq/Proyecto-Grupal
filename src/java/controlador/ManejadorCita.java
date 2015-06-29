@@ -50,8 +50,9 @@ public class ManejadorCita {
         this.cita = cita;
     }
 
-    public void agregarCita(String correo, String contraseña) throws JDOMException, IOException, ParseException {
+    public String agregarCita(String correo, String contraseña) throws JDOMException, IOException, ParseException {
         registroCita.addCita(this.cita, registroUsuarioXML.verificarUsuario(contraseña,correo));
+        return "historialCitas";
     }
     
     public ArrayList<Cita> getListaCitas(String correo) throws ParseException, JDOMException, IOException {
