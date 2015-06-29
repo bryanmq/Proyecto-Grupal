@@ -16,6 +16,7 @@ import javax.faces.bean.RequestScoped;
 @ManagedBean
 @RequestScoped
 public class Cita {
+
     private Usuario usuario;
     private Date fecha;
     private String hora;
@@ -52,6 +53,5 @@ public class Cita {
     public void setEspecialidad(String especialidad) {
         this.especialidad = especialidad;
     }
-    
-    
+
 }

@@ -8,19 +8,18 @@ package modelo;
 import java.util.Date;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 
 /**
  *
  * @author bryanmq
  */
 @ManagedBean
-@ApplicationScoped 
+@ApplicationScoped
 public class Usuario {
 
     private String nombre, cedula, telefono, sexo, direccion, correo, contraseña;
     private Date fechaNacimiento;
-    
+
     public Usuario() {
     }
 
@@ -98,6 +97,5 @@ public class Usuario {
     public void setFechaNacimiento(Date fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
-    
-   
+
 }

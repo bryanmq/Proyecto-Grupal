@@ -12,12 +12,9 @@ import java.util.ArrayList;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
-import javax.faces.context.FacesContext;
-import javax.faces.event.ActionEvent;
 import modelo.Cita;
 import modelo.RegistroCitaXML;
 import modelo.RegistroUsuarioXML;
-import modelo.Usuario;
 import org.jdom2.JDOMException;
 
 /**
@@ -51,10 +48,10 @@ public class ManejadorCita {
     }
 
     public String agregarCita(String correo, String contraseña) throws JDOMException, IOException, ParseException {
-        registroCita.addCita(this.cita, registroUsuarioXML.verificarUsuario(contraseña,correo));
+        registroCita.addCita(this.cita, registroUsuarioXML.verificarUsuario(contraseña, correo));
         return "historialCitas";
     }
-    
+
     public ArrayList<Cita> getListaCitas(String correo) throws ParseException, JDOMException, IOException {
         ArrayList<Cita> listaUser = registroCita.getCitas(correo);
         return listaUser;

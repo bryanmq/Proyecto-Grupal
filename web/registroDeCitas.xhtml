@@ -39,7 +39,7 @@ and open the template in the editor.
 
                             <p:outputLabel value="Fecha de Cita"/>
                             <p:calendar id="calendario" value="#{manejadorCita.cita.fecha}"/>
-                            
+
                             <p:commandButton value="Regresar" icon="ui-icon-arrowreturnthick-1-w" ajax="false" action="loginUser" immediate="true"/>
                             <p:commandButton value="Registrar Cita" action="#{manejadorCita.agregarCita(usuario.correo, usuario.contraseña)}"/>
                         </h:panelGrid>

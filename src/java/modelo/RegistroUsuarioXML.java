@@ -164,7 +164,7 @@ public class RegistroUsuarioXML {
     }
 
     public void modificarUsuario(Usuario user) {
-        Element usuarioEncontrado = (Element) this.verificarUsuarioXCedula(user.getCedula(),0);
+        Element usuarioEncontrado = (Element) this.verificarUsuarioXCedula(user.getCedula(), 0);
         usuarioEncontrado.getChild("nombre").setText(user.getNombre());
         usuarioEncontrado.getChild("telefono").setText(user.getTelefono());
         usuarioEncontrado.getChild("fechaNacimiento").setText(user.getFechaNacimiento().toString());

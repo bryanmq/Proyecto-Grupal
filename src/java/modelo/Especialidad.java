@@ -24,13 +24,13 @@ public class Especialidad {
     public Especialidad() {
         arrayEspecialidades = new ArrayList<>();
         arrayEspecialidades.add("Pediatría");
-        arrayEspecialidades.add("Ginecología");        
+        arrayEspecialidades.add("Ginecología");
         arrayEspecialidades.add("Odontología");
         arrayEspecialidades.add("Cirugia plastica");
-        
+
         arrayHora = new ArrayList<>();
         arrayHora.add("10:30am");
-        arrayHora.add("11:30am");        
+        arrayHora.add("11:30am");
         arrayHora.add("1:30pm");
         arrayHora.add("3:30pm");
     }
@@ -50,7 +50,5 @@ public class Especialidad {
     public void setArrayHora(List<String> arrayHora) {
         this.arrayHora = arrayHora;
     }
-    
-    
-    
+
 }

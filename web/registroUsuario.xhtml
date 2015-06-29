@@ -18,7 +18,7 @@
         <div id="top">
             <ui:insert name="top">"Registro de Usuarios"</ui:insert>
         </div>
-        
+
         <div>
             <div id="left">
                 <ui:insert name="left">
@@ -73,7 +73,7 @@
                             <p:outputLabel for="verificar" value="Verificar contraseña:"/>
                             <p:password id="verificar" value="#{manejadorUsuario.usuario.contraseña}" required="true" requiredMessage="Escriba la verificación"/>
                             <p:message for="verificar"/>
-                                
+
                             <p:commandButton value="Registrar" ajax="false" action="#{manejadorUsuario.agregarUsuario(e)}" />
                             <p:commandButton value="Regresar" ajax="false" action="paginaPrincipal" immediate="true"/>
                             <!-- immediate=omite las validaciones -->
