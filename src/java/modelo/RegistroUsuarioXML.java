@@ -104,6 +104,7 @@ public class RegistroUsuarioXML {
         for (Element usuario : listaUsuarios) {
             if (usuario.getChildText("password").equals(contraseña) && usuario.getChildText("correo").equals(correo)) {
                 Date date = new Date(usuario.getChildText("fechaNacimiento"));
+                System.out.println(":DDDDDDDDDDDDDDDDDD");
                 return new Usuario(
                         usuario.getChildText("nombre"),
                         usuario.getAttributeValue("cedula"),

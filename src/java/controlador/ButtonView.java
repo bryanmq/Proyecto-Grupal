@@ -19,10 +19,14 @@ import javax.faces.event.ActionEvent;
 @RequestScoped
 public class ButtonView {
 
-     public void buttonAction(ActionEvent actionEvent) {
+    public void buttonAction(ActionEvent actionEvent) {
         addMessage("¡Sus datos fueron guardados exitosamente!");
     }
-     
+    
+    public void buttonActionCita(ActionEvent actionEvent) {
+        addMessage("¡Su cita fue reservada exitosamente!");
+    }
+    
     public void addMessage(String summary) {
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary,  null);
         FacesContext.getCurrentInstance().addMessage(null, message);

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <head>
+        <title>Registrar cita medica</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <h:outputStylesheet name="./css/default.css"/>
+        <h:outputStylesheet name="./css/cssLayout.css"/>
+        <h:outputStylesheet name="./css/styles.css"/>
+    </head>
+    <body>
+        <div>
+            <ui:composition template="paginaPrincipal.xhtml">
+
+                <ui:define name="content" class="center_content">
+                    <h:form>
+                        <p:growl id="growl" life="3000" />
+                        <h:panelGrid columns="2">
+                            <p:outputLabel value="Especialidad"/>
+                            <p:selectOneMenu id="especialidad" value="#{manejadorCita.cita.especialidad}">
+                                <f:selectItem itemLabel="Seleccione una especialidad" itemValue=""/>
+                                <f:selectItems value="#{especialidad.arrayEspecialidades}" />
+                            </p:selectOneMenu>
+
+                            <p:outputLabel value="Hora"/>
+                            <p:selectOneMenu id="hora" value="#{manejadorCita.cita.hora}">
+                                <f:selectItem itemLabel="Seleccione una Hora de cita" itemValue=""/>
+                                <f:selectItems value="#{especialidad.arrayHora}" />
+                            </p:selectOneMenu>
+
+                            <p:outputLabel value="Fecha de Cita"/>
+                            <p:calendar id="calendario" value="#{manejadorCita.cita.fecha}"/>
+                            
+                            <p:commandButton value="Registrar Cita" update="growl" actionListener="#{buttonView.buttonActionCita}" action="#{manejadorCita.agregarCita(usuario.correo, usuario.contraseña)}"/>
+                            <p:commandButton value="Regresar" icon="ui-icon-arrowreturnthick-1-w" ajax="false" action="loginUser" immediate="true"/>
+                            
+                        </h:panelGrid>
+                    </h:form>
+                </ui:define>
+
+
+
+            </ui:composition>
+        </div>
+    </body>
+</html>
