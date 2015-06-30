@@ -66,10 +66,10 @@ and open the template in the editor.
                             <p:inputText id="contraseña" value="#{manejadorUsuario.usuario.contraseña}" required="true" requiredMessage="Escriba la contraseña"/>             
                             <p:message for="contraseña"/>
                             
-                            <p:commandButton value="Regresar" icon="ui-icon-arrowreturnthick-1-w" ajax="false" action="loginUser" immediate="true"/>
+                            <p:commandButton value="Menu Principal" icon="ui-icon-home" ajax="false" action="loginUser" immediate="true"/>
                             <h:panelGrid columns="2">
-                            <p:commandButton value="Modificar" update="growl" actionListener="#{buttonView.buttonAction}" action="#{manejadorUsuario.modificarUsuario()}" />
-                            <p:commandButton value="Eliminar Cuenta" action="#{manejadorUsuario.eliminarUsuario()}" onclick="alert('¡Su cuenta fue eliminada exitosamente, gracias por preferinos!')"/>
+                                <p:commandButton value="Modificar" icon="ui-icon-pencil" update="growl" actionListener="#{buttonView.buttonAction}" action="#{manejadorUsuario.modificarUsuario()}" />
+                                <p:commandButton value="Eliminar Cuenta" icon="ui-icon-closethick" action="#{manejadorUsuario.eliminarUsuario()}" onclick="alert('¡Su cuenta fue eliminada exitosamente, gracias por preferinos!')"/>
                             </h:panelGrid>
                             <!-- immediate=omite las validaciones -->
                         </h:panelGrid>

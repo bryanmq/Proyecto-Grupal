@@ -74,8 +74,8 @@
                             <p:password id="verificar" value="#{manejadorUsuario.usuario.contraseña}" required="true" requiredMessage="Escriba la verificación"/>
                             <p:message for="verificar"/>
 
-                            <p:commandButton value="Registrar" ajax="false" action="#{manejadorUsuario.agregarUsuario(e)}" />
-                            <p:commandButton value="Regresar" ajax="false" action="paginaPrincipal" immediate="true"/>
+                            <p:commandButton value="Registrar" ajax="false" icon="ui-icon-person" action="#{manejadorUsuario.agregarUsuario(e)}" onclick="alert('¡Su cuenta fue creada exitosamente!\nIngrese sus datos en el menu principal para ingresar')" />
+                            <p:commandButton value="Regresar" ajax="false" action="paginaPrincipal" icon="ui-icon-arrowrefresh-1-w" immediate="true"/>
                             <!-- immediate=omite las validaciones -->
                         </h:panelGrid>
                     </h:form>

@@ -6,6 +6,7 @@
 package modelo;
 
 import java.util.Date;
+import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
@@ -14,13 +15,16 @@ import javax.faces.bean.RequestScoped;
  * @author scarlet
  */
 @ManagedBean
-@RequestScoped
+@ApplicationScoped
 public class Cita {
 
     private Usuario usuario;
     private Date fecha;
     private String hora;
     private String especialidad;
+
+    
+    
 
     public Usuario getUsuario() {
         return usuario;

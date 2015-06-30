@@ -5,12 +5,36 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <head>
         <title>TODO supply a title</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
     <body>
-        <div>TODO write content</div>
+        <div>
+            <ui:composition template="loginUser.xhtml">
+                <ui:define name="content">
+
+                    <h:form>
+                        <h:panelGrid columns="1">
+                            <p:outputLabel value="Selecciona la cita que desea cancelar"/>
+                            <p:selectOneMenu id="hora" value="#{manejadorCita.cita.especialidad}">
+                                <f:selectItem itemLabel="Seleccione la cita" itemValue=""/>
+                                <f:selectItems value="#{manejadorCita.getArrayString(usuario.correo) }" />
+                            </p:selectOneMenu>
+                            <h:panelGrid columns="2">
+                                <p:commandButton value="Regresar" icon="ui-icon-arrowreturnthick-1-w" ajax="false" action="loginUser" immediate="true"/>
+                                <p:commandButton value="CANCELAR CITA" action="#{manejadorCita.cancelarCita(usuario.correo)}"  onclick="alert('¡Su cita fue cancelada exitosamente!')"/>
+                            </h:panelGrid>
+                        </h:panelGrid>
+                    </h:form>
+
+                </ui:define>
+            </ui:composition>
+        </div>
     </body>
 </html>

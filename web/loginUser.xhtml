@@ -28,17 +28,17 @@ and open the template in the editor.
                 <ui:define name="content">
                     <h:form>  
                         <p:menubar>
-                            <p:submenu label="Registro de Citas" icon="ui-icon-document">
-                                <p:menuitem value="Agregar una cita" url="http://localhost:8080/Clinica_Proyecto_Grupal/faces/registroDeCitas.xhtml"/>
-                                <p:menuitem value="Modificar una cita" url="#" />
+                            <p:submenu label="Registro de Citas" icon="ui-icon-clock">
+                                <p:menuitem value="Agregar una cita" icon="ui-icon-circle-plus" url="http://localhost:8080/Clinica_Proyecto_Grupal/faces/registroDeCitas.xhtml"/>
+                                <p:menuitem value="Cancelar Cita" icon ="ui-icon-cancel" url="http://localhost:8080/Clinica_Proyecto_Grupal/faces/modificarCitas.xhtml" />
                             </p:submenu>
 
-                            <p:submenu label="Historial de citas">
+                            <p:submenu label="Historial de citas" icon=" ui-icon-calendar">
                                 <p:menuitem value="Ver historial" url="http://localhost:8080/Clinica_Proyecto_Grupal/faces/historialCitas.xhtml" icon="ui-icon-arrowreturnthick-1-w" />
                             </p:submenu>
 
-                            <p:submenu label="Configuración Personal">
-                                <p:menuitem value="Actualizar Datos"  action="actualizarUsuario" icon="ui-icon-arrowreturnthick-1-w" />
+                            <p:submenu label="Configuración Personal" icon="ui-icon-person">
+                                <p:menuitem value="Actualizar Datos" icon="ui-icon-refresh" url="http://localhost:8080/Clinica_Proyecto_Grupal/faces/actualizarUsuario.xhtml" />
                             </p:submenu>
 
                             <f:facet name="options">
@@ -51,7 +51,10 @@ and open the template in the editor.
 
                 <ui:define name="bottom">
                     <div id="bottom2">
-                        <img src="resources/images/logo.jpg" id="main3"/></div>
+                        <p:galleria value="#{imageView.images}" var="image" panelWidth="500" panelHeight="313" showCaption="true">
+                            <p:graphicImage value="resources/images/#{image}" alt="Nuestro mayor placer es servirle" title="CLINICA &#34;LOSTALO&#34;"/>
+                        </p:galleria>
+                    </div>
                 </ui:define>
 
             </ui:composition>

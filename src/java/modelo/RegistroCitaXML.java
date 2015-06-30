@@ -20,6 +20,7 @@ import org.jdom2.Attribute;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
+import org.jdom2.filter.Filter;
 import org.jdom2.input.SAXBuilder;
 import org.jdom2.output.XMLOutputter;
 
@@ -77,47 +78,65 @@ public class RegistroCitaXML {
         }
     }
 
-    public void addCita(Cita cita, Usuario usuario) throws IOException {
-        Element eCita = new Element("cita");
-        Element nombre = new Element("nombre");
-        Element telefono = new Element("telefono");
-        Element fechaNacimiento = new Element("fechaNacimiento");
-        Element sexo = new Element("sexo");
-        Element direccion = new Element("direccion");
-        Element correo = new Element("correo");
-        Element fechaDeCita = new Element("fechaDeCita");
-        Element hora = new Element("hora");
-        Element especialidad = new Element("especialidad");
-        Attribute cedula = new Attribute("cedula", usuario.getCedula());
+    public boolean verificarCita(String hora, String paciente, Date fecha, String especialidad) {
+        boolean state = false;
+        List<Element> listaE = (List<Element>) raiz.getChildren();
 
-        nombre.addContent(usuario.getNombre());
-        telefono.addContent(usuario.getTelefono());
-        fechaNacimiento.addContent(usuario.getFechaNacimiento().toString());
-        sexo.addContent(usuario.getSexo());
-        direccion.addContent(usuario.getDireccion());
-        correo.addContent(usuario.getCorreo());
+        for (Element listaE1 : listaE) {
+            if (listaE1.getChildText("nombre").equals(paciente) && listaE1.getChildText("especialidad").equals(especialidad) && listaE1.getChildText("hora").equals(hora) && listaE1.getChildText("fecha").equals(fecha.toString())) {
+                state = true;
+            } else {
+                state = false;
+            }
+        }
+        return state;
+    }
 
-        fechaDeCita.addContent(cita.getFecha().toString());
-        hora.addContent(cita.getHora());
-        especialidad.addContent(cita.getEspecialidad());
+    public String addCita(Cita cita, Usuario usuario) throws IOException {
+        if (verificarCita(cita.getHora(), usuario.getNombre(), cita.getFecha(), cita.getEspecialidad()) != true) {
+            Element eCita = new Element("cita");
+            Element nombre = new Element("nombre");
+            Element telefono = new Element("telefono");
+            Element fechaNacimiento = new Element("fechaNacimiento");
+            Element sexo = new Element("sexo");
+            Element direccion = new Element("direccion");
+            Element correo = new Element("correo");
+            Element fechaDeCita = new Element("fechaDeCita");
+            Element hora = new Element("hora");
+            Element especialidad = new Element("especialidad");
+            Attribute cedula = new Attribute("cedula", usuario.getCedula());
 
-        eCita.setAttribute(cedula);
-        eCita.addContent(nombre);
-        eCita.addContent(telefono);
-        eCita.addContent(fechaNacimiento);
-        eCita.addContent(sexo);
-        eCita.addContent(direccion);
-        eCita.addContent(correo);
-        eCita.addContent(fechaDeCita);
-        eCita.addContent(hora);
-        eCita.addContent(especialidad);
+            nombre.addContent(usuario.getNombre());
+            telefono.addContent(usuario.getTelefono());
+            fechaNacimiento.addContent(usuario.getFechaNacimiento().toString());
+            sexo.addContent(usuario.getSexo());
+            direccion.addContent(usuario.getDireccion());
+            correo.addContent(usuario.getCorreo());
 
-        raiz.addContent(eCita);
-        this.guardar();
+            fechaDeCita.addContent(cita.getFecha().toString());
+            hora.addContent(cita.getHora());
+            especialidad.addContent(cita.getEspecialidad());
+
+            eCita.setAttribute(cedula);
+            eCita.addContent(nombre);
+            eCita.addContent(telefono);
+            eCita.addContent(fechaNacimiento);
+            eCita.addContent(sexo);
+            eCita.addContent(direccion);
+            eCita.addContent(correo);
+            eCita.addContent(fechaDeCita);
+            eCita.addContent(hora);
+            eCita.addContent(especialidad);
+
+            raiz.addContent(eCita);
+            this.guardar();
+            return "historialCitas";
+        }
+        return "errorMessage";
     }
 
     public ArrayList<Cita> getCitasEspecificas(String correo) throws ParseException {
-        ArrayList<Cita> listaUsuarios = new ArrayList<>();
+        ArrayList<Cita> listaCitas = new ArrayList<>();
         Cita cita;
         Usuario usuario;
         List<Element> listaE = (List<Element>) raiz.getChildren();
@@ -138,15 +157,15 @@ public class RegistroCitaXML {
                 cita.setEspecialidad(listaE1.getChildText("especialidad"));
                 cita.setHora(listaE1.getChildText("hora"));
                 cita.setUsuario(usuario);
-                listaUsuarios.add(cita);
+                listaCitas.add(cita);
             }
 
         }
-        return listaUsuarios;
+        return listaCitas;
     }
 
     public ArrayList<Cita> getCitas() throws ParseException {
-        ArrayList<Cita> listaUsuarios = new ArrayList<>();
+        ArrayList<Cita> listaCitas = new ArrayList<>();
         Cita cita;
         Usuario usuario;
         List<Element> listaE = (List<Element>) raiz.getChildren();
@@ -166,9 +185,43 @@ public class RegistroCitaXML {
             cita.setEspecialidad(listaE1.getChildText("especialidad"));
             cita.setHora(listaE1.getChildText("hora"));
             cita.setUsuario(usuario);
-            listaUsuarios.add(cita);
+            listaCitas.add(cita);
         }
-        return listaUsuarios;
+        return listaCitas;
+    }
+    
+    public ArrayList<String> getArrayDeCitas(String correo) {
+        ArrayList<String> listaCitas = new ArrayList<>();
+        List<Element> listaE = (List<Element>) raiz.getChildren();
+
+        for (Element listaE1 : listaE) {
+            if (listaE1.getChildText("correo").equals(correo)) {
+                listaCitas.add(listaE1.getChildText("especialidad"));
+            }
+
+        }
+        return listaCitas;
+    }
+    
+    public Element buscarCitaXCorreo(String correo) throws ParseException {
+        
+        Cita cita;
+        Usuario usuario;
+        List<Element> listaE = (List<Element>) raiz.getChildren();
+
+        for (Element listaE1 : listaE) {
+            if (listaE1.getChildText("correo").equals(correo)) {
+                
+                return listaE1;
+            }
+
+        }
+        return null;
+    }
+    
+    public void eliminarCita(String correo) throws IOException, ParseException {
+        raiz.removeContent( buscarCitaXCorreo(correo));
+        guardar();
     }
 
 }

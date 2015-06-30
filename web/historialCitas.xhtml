@@ -18,17 +18,17 @@ and open the template in the editor.
             <ui:composition template="loginAdmin.xhtml">
                 <ui:define name="content">
                     <p:outputLabel value="HISTORIAL PERSONAL DE CITAS RESERVADAS"/>
-                    <p:dataTable var="user" value="#{manejadorCita.getListaCitas(usuario.correo)}">
+                    <p:dataTable var="citas" value="#{manejadorCita.getListaCitas(usuario.correo)}">
                         <p:column headerText="Especialidad">
-                            <p:outputLabel value="#{user.especialidad}"/>
+                            <p:outputLabel value="#{citas.especialidad}"/>
                         </p:column>
 
                         <p:column headerText="Fecha">
-                            <p:outputLabel value="#{user.fecha}"/>
+                            <p:outputLabel value="#{citas.fecha}"/>
                         </p:column>
 
                         <p:column headerText="Hora de Cita">
-                            <p:outputLabel value="#{user.hora}"/>
+                            <p:outputLabel value="#{citas.hora}"/>
                         </p:column>
                     </p:dataTable>
 

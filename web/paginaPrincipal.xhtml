@@ -18,6 +18,10 @@
         <div id="top">
             <ui:insert name="top">
                 <img src="resources/images/clinica.jpg" id="main"/>
+                <h:form>
+                    <p:commandLink value="Acerca de | " style="font-size: 15px; color: #ffffff;" action="quienesSomos"  />
+                    <p:commandLink value="  Contáctenos" style="font-size: 15px; color: #ffffff;" action="contactenos"  />
+                </h:form>
             </ui:insert>
         </div>
 
@@ -31,7 +35,7 @@
                         <p:outputLabel value="Contraseña: "/>
                         <p:password value="#{usuario.contraseña}"/>
 
-                        <p:commandButton value="Ingresar" action="#{manejadorUsuario.login(usuario.contraseña, usuario.correo)}" onclick="alert('¡Bienvenido: #{manejadorUsuario.infoUsuario.nombre}!')"/>
+                        <p:commandButton value="Ingresar" action="#{manejadorUsuario.login(usuario.contraseña, usuario.correo)}" icon="	ui-icon-key" onclick="alert('¡Bienvenido!')"/>
                         <h:panelGrid  columns="1">
                             <p:outputLabel value="¿No dispones de una cuenta?"/>
                             <p:commandLink value="Regístrate ahora" style="font-size: 15px; color: #ffffff;" action="registroUsuario"  />

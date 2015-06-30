@@ -18,6 +18,7 @@ import javax.faces.event.ActionEvent;
 import modelo.RegistroUsuarioXML;
 import modelo.Usuario;
 import org.jdom2.JDOMException;
+import org.primefaces.context.RequestContext;
 
 /**
  *

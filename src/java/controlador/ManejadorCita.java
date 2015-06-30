@@ -9,6 +9,8 @@ import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
@@ -48,8 +50,13 @@ public class ManejadorCita {
     }
 
     public String agregarCita(String correo, String contraseña) throws JDOMException, IOException, ParseException {
-        registroCita.addCita(this.cita, registroUsuarioXML.verificarUsuario(contraseña, correo));
-        return "historialCitas";
+        String message="";
+        message=registroCita.addCita(this.cita, registroUsuarioXML.verificarUsuario(contraseña, correo));
+        return message;
+    }
+    
+    public ArrayList<String> getArrayString(String correo){
+        return registroCita.getArrayDeCitas(correo);
     }
 
     public ArrayList<Cita> getListaCitas(String correo) throws ParseException, JDOMException, IOException {
@@ -60,6 +67,17 @@ public class ManejadorCita {
     public ArrayList<Cita> getListaCitasGeneral() throws ParseException, JDOMException, IOException {
         ArrayList<Cita> listaUser = registroCita.getCitas();
         return listaUser;
+    }
+    
+    public String cancelarCita(String correo){
+        try {
+            registroCita.eliminarCita(correo);
+        } catch (IOException ex) {
+            Logger.getLogger(ManejadorCita.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(ManejadorCita.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return "loginUser";
     }
 
 }
