@@ -116,7 +116,7 @@ public class RegistroCitaXML {
         this.guardar();
     }
 
-    public ArrayList<Cita> getCitas(String correo) throws ParseException {
+    public ArrayList<Cita> getCitasEspecificas(String correo) throws ParseException {
         ArrayList<Cita> listaUsuarios = new ArrayList<>();
         Cita cita;
         Usuario usuario;
@@ -141,6 +141,32 @@ public class RegistroCitaXML {
                 listaUsuarios.add(cita);
             }
 
+        }
+        return listaUsuarios;
+    }
+
+    public ArrayList<Cita> getCitas() throws ParseException {
+        ArrayList<Cita> listaUsuarios = new ArrayList<>();
+        Cita cita;
+        Usuario usuario;
+        List<Element> listaE = (List<Element>) raiz.getChildren();
+
+        for (Element listaE1 : listaE) {
+            usuario = new Usuario();
+            Date fecha = new Date(listaE1.getChildText("fechaNacimiento"));
+            Date fecha2 = new Date(listaE1.getChildText("fechaDeCita"));
+            usuario.setCedula(listaE1.getAttributeValue("cedula"));
+            usuario.setNombre(listaE1.getChildText("nombre"));
+            usuario.setTelefono(listaE1.getChildText("telefono"));
+            usuario.setFechaNacimiento(fecha);
+            usuario.setSexo(listaE1.getChildText("sexo"));
+            usuario.setCorreo(listaE1.getChildText("correo"));
+            cita = new Cita();
+            cita.setFecha(fecha2);
+            cita.setEspecialidad(listaE1.getChildText("especialidad"));
+            cita.setHora(listaE1.getChildText("hora"));
+            cita.setUsuario(usuario);
+            listaUsuarios.add(cita);
         }
         return listaUsuarios;
     }

@@ -41,7 +41,7 @@ and open the template in the editor.
                             <p:calendar id="calendario" value="#{manejadorCita.cita.fecha}"/>
 
                             <p:commandButton value="Regresar" icon="ui-icon-arrowreturnthick-1-w" ajax="false" action="loginUser" immediate="true"/>
-                            <p:commandButton value="Registrar Cita" action="#{manejadorCita.agregarCita(usuario.correo, usuario.contraseña)}"/>
+                            <p:commandButton value="Registrar Cita" action="#{manejadorCita.agregarCita(usuario.correo, usuario.contraseña)}" onclick="alert('¡Su cita fue reservada exitosamente!')"/>
                         </h:panelGrid>
                     </h:form>
                 </ui:define>

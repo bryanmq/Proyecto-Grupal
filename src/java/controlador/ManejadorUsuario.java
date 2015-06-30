@@ -9,6 +9,8 @@ import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
@@ -74,6 +76,15 @@ public class ManejadorUsuario {
     public ArrayList<Usuario> getListaUser() throws ParseException, JDOMException, IOException {
         ArrayList<Usuario> listaUser = registroUsuarioXML.getUsuario();
         return listaUser;
+    }
+    
+    public String eliminarUsuario(){
+        try {
+            registroUsuarioXML.eliminarUsuario(usuario);
+        } catch (IOException ex) {
+            Logger.getLogger(ManejadorUsuario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return "index";
     }
 
 }

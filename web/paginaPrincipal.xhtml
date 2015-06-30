@@ -31,7 +31,7 @@
                         <p:outputLabel value="Contraseña: "/>
                         <p:password value="#{usuario.contraseña}"/>
 
-                        <p:commandButton value="Ingresar" action="#{manejadorUsuario.login(usuario.contraseña, usuario.correo)}"/>
+                        <p:commandButton value="Ingresar" action="#{manejadorUsuario.login(usuario.contraseña, usuario.correo)}" onclick="alert('¡Bienvenido: #{manejadorUsuario.infoUsuario.nombre}!')"/>
                         <h:panelGrid  columns="1">
                             <p:outputLabel value="¿No dispones de una cuenta?"/>
                             <p:commandLink value="Regístrate ahora" style="font-size: 15px; color: #ffffff;" action="registroUsuario"  />

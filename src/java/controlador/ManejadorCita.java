@@ -53,7 +53,12 @@ public class ManejadorCita {
     }
 
     public ArrayList<Cita> getListaCitas(String correo) throws ParseException, JDOMException, IOException {
-        ArrayList<Cita> listaUser = registroCita.getCitas(correo);
+        ArrayList<Cita> listaUser = registroCita.getCitasEspecificas(correo);
+        return listaUser;
+    }
+    
+    public ArrayList<Cita> getListaCitasGeneral() throws ParseException, JDOMException, IOException {
+        ArrayList<Cita> listaUser = registroCita.getCitas();
         return listaUser;
     }
 

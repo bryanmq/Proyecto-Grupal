@@ -15,9 +15,11 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.jdom2.Attribute;
+import org.jdom2.Content;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
+import org.jdom2.filter.Filter;
 import org.jdom2.input.SAXBuilder;
 import org.jdom2.output.XMLOutputter;
 
@@ -172,6 +174,11 @@ public class RegistroUsuarioXML {
         usuarioEncontrado.getChild("direccion").setText(user.getDireccion());
         usuarioEncontrado.getChild("correo").setText(user.getCorreo());
         usuarioEncontrado.getChild("password").setText(user.getContraseña());
+        guardar();
+    }
+    
+    public void eliminarUsuario(Usuario usuario) throws IOException {
+        raiz.removeContent((Element) verificarUsuarioXCedula(usuario.getCedula(), 0));
         guardar();
     }
 
